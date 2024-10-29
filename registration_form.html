@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <style>
+        /* Basic styling for the body */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Form container */
+        .form-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+
+        /* Form styling */
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            margin: 10px 0 5px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .error {
+            color: red;
+            margin-bottom: 10px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <h2>Registration Form</h2>
+        <form id="registrationForm" onsubmit="return validateForm()">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" placeholder="Enter your full name">
+
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email address">
+
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password">
+
+            <label for="confirmPassword">Confirm Password</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password">
+
+            <p class="error" id="error-message"></p>
+
+            <input type="submit" value="Register">
+        </form>
+    </div>
+
+    <script>
+        // JavaScript function to validate form
+        function validateForm() {
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            const confirmPassword = document.getElementById("confirmPassword").value;
+            const errorMessage = document.getElementById("error-message");
+
+            // Clear any previous error message
+            errorMessage.style.display = 'none';
+            errorMessage.innerHTML = '';
+
+            // Validation conditions
+            if (name === "") {
+                showError("Please enter your full name.");
+                return false;
+            }
+            if (email === "") {
+                showError("Please enter your email address.");
+                return false;
+            }
+            if (password === "") {
+                showError("Please enter a password.");
+                return false;
+            }
+            if (password.length < 6) {
+                showError("Password must be at least 6 characters long.");
+                return false;
+            }
+            if (password !== confirmPassword) {
+                showError("Passwords do not match.");
+                return false;
+            }
+
+            // If validation passes
+            alert("Registration successful!");
+            return true;
+        }
+
+        // Function to show error message
+        function showError(message) {
+            const errorMessage = document.getElementById("error-message");
+            errorMessage.style.display = 'block';
+            errorMessage.innerHTML = message;
+        }
+    </script>
+
+</body>
+</html>
